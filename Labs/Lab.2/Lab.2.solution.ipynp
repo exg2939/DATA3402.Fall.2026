@@ -1,0 +1,1486 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "IoqTTBORUbdk"
+      },
+      "source": [
+        "# Lab 2 — Tic‑Tac‑Toe (n×n)\n",
+        "\n",
+        "In this lab you will build an **n×n tic‑tac‑toe** game.\n",
+        "\n",
+        "As you work through the exercises, make sure your solutions work for **any** board size `n` (not just 3×3), unless an exercise states otherwise.\n"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "w11kpkeMUbdm"
+      },
+      "source": [
+        "## Responsible Use of Large Language Models (LLMs)\n",
+        "\n",
+        "In this lab, **you are allowed and encouraged to use LLMs responsibly** as learning tools.\n",
+        "Think of them as **tutors, reference books, and debugging partners** — not as answer generators.\n",
+        "\n",
+        "### Appropriate uses\n",
+        "- Asking for **explanations** of Python concepts (lists, loops, functions, conditionals)\n",
+        "- Getting **hints** or alternative approaches when you are stuck\n",
+        "- Debugging errors *after* you try to reason about them yourself\n",
+        "- Asking an LLM to **explain your own code** back to you\n",
+        "\n",
+        "### Not appropriate\n",
+        "- Copy‑pasting complete solutions without understanding them\n",
+        "- Submitting code you cannot explain\n",
+        "- Using an LLM instead of thinking through the problem first\n",
+        "\n",
+        "You may be asked to explain your code or reflect briefly on how you used an LLM.\n",
+        "\n",
+        "### Commonly used LLMs (examples)\n",
+        "\n",
+        "- **ChatGPT** — https://chat.openai.com  \n",
+        "  General‑purpose reasoning, explanations, and debugging. Good for step‑by‑step thinking.\n",
+        "\n",
+        "- **Claude** — https://claude.ai  \n",
+        "  Strong at reading longer code and giving structured explanations.\n",
+        "\n",
+        "- **Gemini** — https://gemini.google.com  \n",
+        "  Useful for conceptual explanations and comparisons.\n",
+        "\n",
+        "- **GitHub Copilot** — https://github.com/features/copilot  \n",
+        "  IDE‑integrated suggestions. Treat suggestions as *ideas*, not answers.\n",
+        "\n",
+        "- **Perplexity** — https://www.perplexity.ai  \n",
+        "  Search‑oriented answers with sources; useful for “how does X work?” questions.\n",
+        "\n",
+        "No single tool is required or preferred. What matters is **how** you use it.\n"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "fVF08T1NUbdm"
+      },
+      "source": [
+        "## Use of Large Language Models\n",
+        "\n",
+        "We are explicitly going to use LLMs to help with this Lab. Choose an LLM that you will use today. Unless you are already paying for a service, please just use the free versions.\n",
+        "\n",
+        "In exercise 1, we'll practice using an LLM. For subsequent exercises, the rule is that you first try to solve it yourself. If you can't do it off the top of you head, go through the lectures. Everything you need to know is there, including very useful examples. In some cases, solutions are simply minimal modifications of code from lecture. Test your solution and demonstrate that it works as explect. If a problem's solution is eluding you, practice solving problems in the same way as in class, make a plan and decompose it into smaller parts before coding. If it doesn't work correctly, iterate until it does or you are stuck.\n",
+        "\n",
+        "**You may use LLMs if you get stuck.** If you do so, you will need to add cells to this notebook showing:\n",
+        "  * Your original solution until you got stuck.\n",
+        "  * The final prompt you used to solve the problem.\n",
+        "  * The solution and an explanation of what was your mistake, lack of understanding, or misunderstanding.\n"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "-j1rCDYzUbdm"
+      },
+      "source": [
+        "*Exercise 1:* Write a function that creates an **n×n matrix** (a list of lists) representing the state of a tic‑tac‑toe game.\n",
+        "\n",
+        "Use the integers:\n",
+        "\n",
+        "- `0` = empty\n",
+        "- `1` = `\"X\"`\n",
+        "- `2` = `\"O\"`\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "_sKvIs5AUbdn"
+      },
+      "outputs": [],
+      "source": [
+        "def create_board(n):\n",
+        "  return [[0 for j in range(n)] for i in range(n)]"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "IdeZgTmaUbdn",
+        "outputId": "5f22c089-5ac8-4c30-b459-4c4c998eaf70"
+      },
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "[[0, 0, 0], [0, 0, 0], [0, 0, 0]]"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 7
+        }
+      ],
+      "source": [
+        "create_board(3)"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "5RFJ-yngUbdn"
+      },
+      "outputs": [],
+      "source": [
+        "#  Ask an LLM for 3 different solutions here\n",
+        "# Then compare them to your own.\n",
+        "\n",
+        "def create_board(n):\n",
+        "    board = []\n",
+        "\n",
+        "    for i in range(n):\n",
+        "        row = []\n",
+        "        for j in range(n):\n",
+        "            row.append(0)\n",
+        "        board.append(row)\n",
+        "\n",
+        "    return board\n",
+        "\n",
+        "def create_board(n):\n",
+        "    board = []\n",
+        "\n",
+        "    for i in range(n):\n",
+        "        board.append([0] * n)\n",
+        "\n",
+        "    return board\n",
+        "\n",
+        "def create_board(n):\n",
+        "    row = [0] * n\n",
+        "    board = [row.copy() for i in range(n)]\n",
+        "    return board\n",
+        "# Two of these solutions are using for loops which I didn't use, and they are a bit longer than mine as they essentialy are going step by step"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "J94gF7otUbdn"
+      },
+      "source": [
+        "**Question:** Which solution most closely matches your solution? What are the main differences?\n",
+        "\n",
+        "I think the most similar one compared to the one I ended up choosing is probably the second solution in the box above but it still has its differences, as this one uses a for loop and append() to add each row onto the board."
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "uWZSa46bUbdo"
+      },
+      "source": [
+        "*Exercise 2:* Write a function that takes two integers `n` and `m` and **draws** an `n` by `m` game board.\n",
+        "\n",
+        "For example, the following is a 3×3 board:\n",
+        "\n",
+        "```\n",
+        "   --- --- ---\n",
+        "  |   |   |   |\n",
+        "   --- --- ---  \n",
+        "  |   |   |   |\n",
+        "   --- --- ---  \n",
+        "  |   |   |   |\n",
+        "   --- --- ---\n",
+        "```\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "2QrVTzitUbdo"
+      },
+      "outputs": [],
+      "source": [
+        "def draw_board(n,m):\n",
+        "  for i in range(n):\n",
+        "    print(\"   \" + \"--- \" * m)\n",
+        "    print(\"  | \" * (m + 1))\n",
+        "  print(\"   \" + \"--- \" * m)"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "3pn4NXKsUbdo",
+        "outputId": "c0b12186-2a62-4c2b-fb98-f34f6b285780"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "   --- --- --- \n",
+            "  |   |   |   | \n",
+            "   --- --- --- \n",
+            "  |   |   |   | \n",
+            "   --- --- --- \n",
+            "  |   |   |   | \n",
+            "   --- --- --- \n"
+          ]
+        }
+      ],
+      "source": [
+        "draw_board(3,3)"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "8BJVFYmkUbdo"
+      },
+      "source": [
+        "*Exercise 3:* Modify Exercise 2 so that it takes a matrix in the format from Exercise 1 and draws a tic‑tac‑toe board with `\"X\"`s and `\"O\"`s."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "Lpf6i0gwUbdo"
+      },
+      "outputs": [],
+      "source": [
+        "def draw_board(board):\n",
+        "  n = len(board)\n",
+        "  m = len(board[0])\n",
+        "  for i in range(n):\n",
+        "    print(\"  \" + \"--- \" * m)\n",
+        "    row = \" | \"\n",
+        "    for j in range(m):\n",
+        "      cell = board[i][j]\n",
+        "      symbol = \" \" if cell == 0 else str(cell)\n",
+        "      row += symbol + \" | \"\n",
+        "    print(row)\n",
+        "  print(\"  \" + \"--- \" * m)"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "xZkH73pmUbdo",
+        "outputId": "768b5cd7-6425-4168-9a7c-40d112d44abb"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "  --- --- --- \n",
+            " | X |   |   | \n",
+            "  --- --- --- \n",
+            " |   | O |   | \n",
+            "  --- --- --- \n",
+            " |   |   |   | \n",
+            "  --- --- --- \n"
+          ]
+        }
+      ],
+      "source": [
+        "board = create_board(3)\n",
+        "board[0][0] = \"X\"\n",
+        "board[1][1] = \"O\"\n",
+        "draw_board(board)"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "W0Q31uznUbdo"
+      },
+      "source": [
+        "*Exercise 4:* Write a function that takes an `n×n` matrix representing a tic‑tac‑toe game and returns one of the following values:\n",
+        "\n",
+        "- `-1` if the game is **incomplete** (still empty spaces and no winner)\n",
+        "- `0` if the game is a **draw**\n",
+        "- `1` if **player 1** (`\"X\"`) has won\n",
+        "- `2` if **player 2** (`\"O\"`) has won\n",
+        "\n",
+        "Here are some example inputs you can use to test your code:\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "YqtIiEtzUbdo"
+      },
+      "outputs": [],
+      "source": [
+        "def check_winner(board):\n",
+        "  n = len(board)\n",
+        "\n",
+        "  for i in range(n):\n",
+        "    if board[i][0] != 0 and all(board[i][j] == board[i][0] for j in range(n)):\n",
+        "      return 1 if board[i][0] == \"X\" else 2\n",
+        "\n",
+        "  for j in range(n):\n",
+        "    if board[0][j] != 0 and all(board[i][j] == board[0][j] for i in range(n)):\n",
+        "      return 1 if board[0][j] == \"X\" else 2\n",
+        "\n",
+        "  if board[0][0] != 0 and all(board[i][i] == board[0][0] for i in range(n)):\n",
+        "    return 1 if board[0][0] == \"X\" else 2\n",
+        "\n",
+        "  if board[0][n-1] != 0 and all(board[i][n-1-i] == board[0][n-1] for i in range(n)):\n",
+        "    return 1 if board[0][n-1] == \"X\" else 2\n",
+        "\n",
+        "  for i in range(n):\n",
+        "    for j in range(n):\n",
+        "      if board[i][j] == 0:\n",
+        "         return -1\n",
+        "\n",
+        "  return 0\n",
+        "\n",
+        "\n",
+        "\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "v4iNpJ2mUbdo",
+        "outputId": "8d616e33-1c2a-4ab0-d9f5-6fd6953fed34"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "1\n",
+            "2\n",
+            "0\n",
+            "-1\n"
+          ]
+        }
+      ],
+      "source": [
+        "board1 = [[\"X\",\"X\",\"X\"],[\"O\",\"O\",0],[0,0,0]]\n",
+        "print(check_winner(board1))\n",
+        "\n",
+        "board2 = [[\"O\",\"X\",\"X\"],[\"X\",\"O\",\"X\"],[\"X\",\"O\",\"O\"]]\n",
+        "print(check_winner(board2))\n",
+        "\n",
+        "board3 = [[\"X\",\"O\",\"X\"],[\"X\",\"O\",\"O\"],[\"O\",\"X\",\"X\"]]\n",
+        "print(check_winner(board3))\n",
+        "\n",
+        "board4 = [[\"X\",\"O\",\"O\"],[0,\"X\",0],[0,0,0]]\n",
+        "print(check_winner(board4))"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "nxocJigKUbdp"
+      },
+      "outputs": [],
+      "source": [
+        "winner_is_2 = [[2, 2, 0],\n",
+        "\t[2, 1, 0],\n",
+        "\t[2, 1, 1]]\n",
+        "\n",
+        "winner_is_1 = [[1, 2, 0],\n",
+        "\t[2, 1, 0],\n",
+        "\t[2, 1, 1]]\n",
+        "\n",
+        "winner_is_also_1 = [[0, 1, 0],\n",
+        "\t[2, 1, 0],\n",
+        "\t[2, 1, 1]]\n",
+        "\n",
+        "no_winner = [[1, 2, 0],\n",
+        "\t[2, 1, 0],\n",
+        "\t[2, 1, 2]]\n",
+        "\n",
+        "also_no_winner = [[1, 2, 0],\n",
+        "\t[2, 1, 0],\n",
+        "\t[2, 1, 0]]"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "1QkK80mgUbdp"
+      },
+      "source": [
+        "*Exercise 5:* Write a function that takes a game board, a player number, and `(row, col)` coordinates and places the correct mark (`\"X\"` or `\"O\"`) in that location.\n",
+        "\n",
+        "Requirements:\n",
+        "\n",
+        "- Only allow placing a mark in a previously empty location.\n",
+        "- Return `True` if the move was successful, and `False` otherwise.\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "zmlPLtHoUbdp"
+      },
+      "outputs": [],
+      "source": [
+        "def play_mark(board, player, row, col):\n",
+        "  if board[row][col] != 0:\n",
+        "    return False\n",
+        "\n",
+        "  board[row][col] = \"X\" if player == 1 else \"O\"\n",
+        "  return True"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "YkEoEuPMUbdp",
+        "outputId": "ef907fe7-c43f-47b6-bb17-918c3d7b9b6b"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "True\n",
+            "False\n",
+            "True\n",
+            "  --- --- --- \n",
+            " | X |   |   | \n",
+            "  --- --- --- \n",
+            " |   | O |   | \n",
+            "  --- --- --- \n",
+            " |   |   |   | \n",
+            "  --- --- --- \n"
+          ]
+        }
+      ],
+      "source": [
+        "board = create_board(3)\n",
+        "print(play_mark(board, 1, 0, 0))\n",
+        "print(play_mark(board, 2, 0, 0))\n",
+        "print(play_mark(board, 2, 1, 1))\n",
+        "draw_board(board)"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "STI5yGRvUbdp"
+      },
+      "source": [
+        "*Exercise 6:* Modify Exercise 3 to show **row and column labels** so that players can specify locations like `\"A2\"` or `\"C1\"`."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "tP6vLGzRUbdp"
+      },
+      "outputs": [],
+      "source": [
+        "def draw_board(board):\n",
+        "  n = len(board)\n",
+        "  m = len(board[0])\n",
+        "  columns = \"ABCDEFGHIJ\"\n",
+        "\n",
+        "\n",
+        "  header = \"    \"\n",
+        "  for j in range(m):\n",
+        "    header += columns[j] + \"   \"\n",
+        "  print(header)\n",
+        "\n",
+        "  for i in range(n):\n",
+        "    print(\"   \" + \"--- \" * m)\n",
+        "    row = str(i + 1) + \" | \"\n",
+        "    for j in range(m):\n",
+        "      cell = board[i][j]\n",
+        "      symbol = \" \" if cell == 0 else str(cell)\n",
+        "      row += symbol + \" | \"\n",
+        "    print(row)\n",
+        "  print(\"   \" + \"--- \" * m)"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "4cZ8Dqd5Ubdp",
+        "outputId": "4cfa5596-9f3b-44f9-9f53-7ea721a1affb"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "    A   B   C   \n",
+            "   --- --- --- \n",
+            "1 | X |   |   | \n",
+            "   --- --- --- \n",
+            "2 |   | O |   | \n",
+            "   --- --- --- \n",
+            "3 |   |   |   | \n",
+            "   --- --- --- \n"
+          ]
+        }
+      ],
+      "source": [
+        "board = create_board(3)\n",
+        "board[0][0] = \"X\"\n",
+        "board[1][1] = \"O\"\n",
+        "draw_board(board)"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "QfE2m63IUbdp"
+      },
+      "source": [
+        "*Exercise 7:* Write a function that takes a board, a player number, and a location string (as in Exercise 6), then uses your function from Exercise 5 to update the board."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "ExecuteTime": {
+          "end_time": "2026-01-26T21:09:58.171399Z",
+          "start_time": "2026-01-26T21:09:58.169007Z"
+        },
+        "id": "GizM1muLUbdp"
+      },
+      "outputs": [],
+      "source": [
+        "def play_move(board, player, location):\n",
+        "  columns = \"ABCDEFGHIJ\"\n",
+        "\n",
+        "  col_letter = location[0]\n",
+        "  row_number = location[1:]\n",
+        "\n",
+        "  col = columns.index(col_letter)\n",
+        "  row = int(row_number) - 1\n",
+        "\n",
+        "  return play_mark(board, player, row, col)"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "CEWCP1JzUbdq",
+        "outputId": "5abbd393-a4b5-4deb-db99-fa240fb1f570"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "True\n",
+            "True\n",
+            "False\n",
+            "    A   B   C   \n",
+            "   --- --- --- \n",
+            "1 | X |   |   | \n",
+            "   --- --- --- \n",
+            "2 |   | O |   | \n",
+            "   --- --- --- \n",
+            "3 |   |   |   | \n",
+            "   --- --- --- \n"
+          ]
+        }
+      ],
+      "source": [
+        "board = create_board(3)\n",
+        "print(play_move(board, 1, \"A1\"))\n",
+        "print(play_move(board, 2, \"B2\"))\n",
+        "print(play_move(board, 1, \"A1\"))\n",
+        "draw_board(board)"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "8BGl-1uyUbdq"
+      },
+      "source": [
+        "*Exercise 8:* Write a function that is called with a board and player number, takes input from the player using Python's `input()`, and modifies the board using your function from Exercise 7.\n",
+        "\n",
+        "Keep asking for input until the player enters a valid location that results in a valid move.\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "09Vx394oUbdq"
+      },
+      "outputs": [],
+      "source": [
+        "def playermove(board, player):\n",
+        "  while True:\n",
+        "    location = input(f\"Player {player}, enter your move: \")\n",
+        "    success = play_move(board, player, location)\n",
+        "    if success:\n",
+        "      break\n",
+        "    else:\n",
+        "      print(\"Try a different move.\")"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "UASQAUQEUbdq",
+        "outputId": "43c6c018-589e-4355-f4c5-c6dbcbd348b4"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Player 1, enter your move: A1\n",
+            "    A   B   C   \n",
+            "   --- --- --- \n",
+            "1 | X |   |   | \n",
+            "   --- --- --- \n",
+            "2 |   |   |   | \n",
+            "   --- --- --- \n",
+            "3 |   |   |   | \n",
+            "   --- --- --- \n"
+          ]
+        }
+      ],
+      "source": [
+        "board = create_board(3)\n",
+        "playermove(board, 1)\n",
+        "draw_board(board)"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "X_GOcjHZUbdq"
+      },
+      "source": [
+        "*Exercise 9:* Use all of the previous exercises to implement a full tic‑tac‑toe game:\n",
+        "\n",
+        "- draw the board,\n",
+        "- repeatedly ask two players for a location,\n",
+        "- apply valid moves,\n",
+        "- check the game status until a player wins or the game is a draw.\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "XTsymdLxUbdq"
+      },
+      "outputs": [],
+      "source": [
+        "def play_game(n=3):\n",
+        "  board = create_board(n)\n",
+        "  player = 1\n",
+        "\n",
+        "  while True:\n",
+        "    draw_board(board)\n",
+        "    playermove(board, player)\n",
+        "\n",
+        "    result = check_winner(board)\n",
+        "\n",
+        "    if result == 1:\n",
+        "      draw_board(board)\n",
+        "      print(\"Player 1 (X) wins!\")\n",
+        "      break\n",
+        "    elif result == 2:\n",
+        "      draw_board(board)\n",
+        "      print(\"Player 2 (O) wins!\")\n",
+        "      break\n",
+        "    elif result == 0:\n",
+        "      draw_board(board)\n",
+        "      print(\"It's a draw!\")\n",
+        "      break\n",
+        "\n",
+        "\n",
+        "    player = 2 if player == 1 else 1"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "y49P_D8eUbdq",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "fb736e24-4c66-40e3-8844-edc7129dbf5e"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "    A   B   C   \n",
+            "   --- --- --- \n",
+            "1 |   |   |   | \n",
+            "   --- --- --- \n",
+            "2 |   |   |   | \n",
+            "   --- --- --- \n",
+            "3 |   |   |   | \n",
+            "   --- --- --- \n",
+            "Player 1, enter your move: A1\n",
+            "    A   B   C   \n",
+            "   --- --- --- \n",
+            "1 | X |   |   | \n",
+            "   --- --- --- \n",
+            "2 |   |   |   | \n",
+            "   --- --- --- \n",
+            "3 |   |   |   | \n",
+            "   --- --- --- \n",
+            "Player 2, enter your move: B1\n",
+            "    A   B   C   \n",
+            "   --- --- --- \n",
+            "1 | X | O |   | \n",
+            "   --- --- --- \n",
+            "2 |   |   |   | \n",
+            "   --- --- --- \n",
+            "3 |   |   |   | \n",
+            "   --- --- --- \n",
+            "Player 1, enter your move: A2\n",
+            "    A   B   C   \n",
+            "   --- --- --- \n",
+            "1 | X | O |   | \n",
+            "   --- --- --- \n",
+            "2 | X |   |   | \n",
+            "   --- --- --- \n",
+            "3 |   |   |   | \n",
+            "   --- --- --- \n",
+            "Player 2, enter your move: B3\n",
+            "    A   B   C   \n",
+            "   --- --- --- \n",
+            "1 | X | O |   | \n",
+            "   --- --- --- \n",
+            "2 | X |   |   | \n",
+            "   --- --- --- \n",
+            "3 |   | O |   | \n",
+            "   --- --- --- \n",
+            "Player 1, enter your move: A3\n",
+            "    A   B   C   \n",
+            "   --- --- --- \n",
+            "1 | X | O |   | \n",
+            "   --- --- --- \n",
+            "2 | X |   |   | \n",
+            "   --- --- --- \n",
+            "3 | X | O |   | \n",
+            "   --- --- --- \n",
+            "Player 1 (X) wins!\n"
+          ]
+        }
+      ],
+      "source": [
+        "play_game()"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "Dm00BefHUbdq"
+      },
+      "source": [
+        "*Exercise 10:* Test that your game works for **5×5** tic‑tac‑toe."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "8O98OkjmUbdq",
+        "outputId": "ad3fecd8-cf7f-4185-92f7-395987496d19"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "    A   B   C   D   E   \n",
+            "   --- --- --- --- --- \n",
+            "1 |   |   |   |   |   | \n",
+            "   --- --- --- --- --- \n",
+            "2 |   |   |   |   |   | \n",
+            "   --- --- --- --- --- \n",
+            "3 |   |   |   |   |   | \n",
+            "   --- --- --- --- --- \n",
+            "4 |   |   |   |   |   | \n",
+            "   --- --- --- --- --- \n",
+            "5 |   |   |   |   |   | \n",
+            "   --- --- --- --- --- \n",
+            "Player 1, enter your move: A1\n",
+            "    A   B   C   D   E   \n",
+            "   --- --- --- --- --- \n",
+            "1 | X |   |   |   |   | \n",
+            "   --- --- --- --- --- \n",
+            "2 |   |   |   |   |   | \n",
+            "   --- --- --- --- --- \n",
+            "3 |   |   |   |   |   | \n",
+            "   --- --- --- --- --- \n",
+            "4 |   |   |   |   |   | \n",
+            "   --- --- --- --- --- \n",
+            "5 |   |   |   |   |   | \n",
+            "   --- --- --- --- --- \n",
+            "Player 2, enter your move: B1\n",
+            "    A   B   C   D   E   \n",
+            "   --- --- --- --- --- \n",
+            "1 | X | O |   |   |   | \n",
+            "   --- --- --- --- --- \n",
+            "2 |   |   |   |   |   | \n",
+            "   --- --- --- --- --- \n",
+            "3 |   |   |   |   |   | \n",
+            "   --- --- --- --- --- \n",
+            "4 |   |   |   |   |   | \n",
+            "   --- --- --- --- --- \n",
+            "5 |   |   |   |   |   | \n",
+            "   --- --- --- --- --- \n",
+            "Player 1, enter your move: A2\n",
+            "    A   B   C   D   E   \n",
+            "   --- --- --- --- --- \n",
+            "1 | X | O |   |   |   | \n",
+            "   --- --- --- --- --- \n",
+            "2 | X |   |   |   |   | \n",
+            "   --- --- --- --- --- \n",
+            "3 |   |   |   |   |   | \n",
+            "   --- --- --- --- --- \n",
+            "4 |   |   |   |   |   | \n",
+            "   --- --- --- --- --- \n",
+            "5 |   |   |   |   |   | \n",
+            "   --- --- --- --- --- \n",
+            "Player 2, enter your move: B2\n",
+            "    A   B   C   D   E   \n",
+            "   --- --- --- --- --- \n",
+            "1 | X | O |   |   |   | \n",
+            "   --- --- --- --- --- \n",
+            "2 | X | O |   |   |   | \n",
+            "   --- --- --- --- --- \n",
+            "3 |   |   |   |   |   | \n",
+            "   --- --- --- --- --- \n",
+            "4 |   |   |   |   |   | \n",
+            "   --- --- --- --- --- \n",
+            "5 |   |   |   |   |   | \n",
+            "   --- --- --- --- --- \n",
+            "Player 1, enter your move: A3\n",
+            "    A   B   C   D   E   \n",
+            "   --- --- --- --- --- \n",
+            "1 | X | O |   |   |   | \n",
+            "   --- --- --- --- --- \n",
+            "2 | X | O |   |   |   | \n",
+            "   --- --- --- --- --- \n",
+            "3 | X |   |   |   |   | \n",
+            "   --- --- --- --- --- \n",
+            "4 |   |   |   |   |   | \n",
+            "   --- --- --- --- --- \n",
+            "5 |   |   |   |   |   | \n",
+            "   --- --- --- --- --- \n",
+            "Player 2, enter your move: B3\n",
+            "    A   B   C   D   E   \n",
+            "   --- --- --- --- --- \n",
+            "1 | X | O |   |   |   | \n",
+            "   --- --- --- --- --- \n",
+            "2 | X | O |   |   |   | \n",
+            "   --- --- --- --- --- \n",
+            "3 | X | O |   |   |   | \n",
+            "   --- --- --- --- --- \n",
+            "4 |   |   |   |   |   | \n",
+            "   --- --- --- --- --- \n",
+            "5 |   |   |   |   |   | \n",
+            "   --- --- --- --- --- \n",
+            "Player 1, enter your move: A4\n",
+            "    A   B   C   D   E   \n",
+            "   --- --- --- --- --- \n",
+            "1 | X | O |   |   |   | \n",
+            "   --- --- --- --- --- \n",
+            "2 | X | O |   |   |   | \n",
+            "   --- --- --- --- --- \n",
+            "3 | X | O |   |   |   | \n",
+            "   --- --- --- --- --- \n",
+            "4 | X |   |   |   |   | \n",
+            "   --- --- --- --- --- \n",
+            "5 |   |   |   |   |   | \n",
+            "   --- --- --- --- --- \n",
+            "Player 2, enter your move: B4\n",
+            "    A   B   C   D   E   \n",
+            "   --- --- --- --- --- \n",
+            "1 | X | O |   |   |   | \n",
+            "   --- --- --- --- --- \n",
+            "2 | X | O |   |   |   | \n",
+            "   --- --- --- --- --- \n",
+            "3 | X | O |   |   |   | \n",
+            "   --- --- --- --- --- \n",
+            "4 | X | O |   |   |   | \n",
+            "   --- --- --- --- --- \n",
+            "5 |   |   |   |   |   | \n",
+            "   --- --- --- --- --- \n",
+            "Player 1, enter your move: A5\n",
+            "    A   B   C   D   E   \n",
+            "   --- --- --- --- --- \n",
+            "1 | X | O |   |   |   | \n",
+            "   --- --- --- --- --- \n",
+            "2 | X | O |   |   |   | \n",
+            "   --- --- --- --- --- \n",
+            "3 | X | O |   |   |   | \n",
+            "   --- --- --- --- --- \n",
+            "4 | X | O |   |   |   | \n",
+            "   --- --- --- --- --- \n",
+            "5 | X |   |   |   |   | \n",
+            "   --- --- --- --- --- \n",
+            "Player 1 (X) wins!\n"
+          ]
+        }
+      ],
+      "source": [
+        "play_game(5)"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "cZ6oDj3CUbdq"
+      },
+      "source": [
+        "*Exercise 11:* Develop a version of the game where one player is the computer.\n",
+        "\n",
+        "Note: you do **not** need an extensive search for the best move. For example, you can have the computer:\n",
+        "- block obvious losses\n",
+        "- otherwise try to create a winning row/column/diagonal\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "IYrbYipYUbdq"
+      },
+      "outputs": [],
+      "source": [
+        "def find_winning_move(board, mark):\n",
+        "  n = len(board)\n",
+        "  for i in range(n):\n",
+        "    for j in range(n):\n",
+        "      if board[i][j] == 0:\n",
+        "        board[i][j] = mark\n",
+        "        if check_winner(board) not in (-1, 0):\n",
+        "          board[i][j] = 0\n",
+        "          return (i, j)\n",
+        "        board[i][j] = 0\n",
+        "  return None\n",
+        "\n",
+        "def computer_move(board, player):\n",
+        "  my_mark = \"X\" if player == 1 else \"O\"\n",
+        "  opp_mark = \"O\" if player == 1 else \"X\"\n",
+        "\n",
+        "  move = find_winning_move(board, my_mark)      # 1. can I win?\n",
+        "  if move is None:\n",
+        "    move = find_winning_move(board, opp_mark)   # 2. block opponent's win\n",
+        "\n",
+        "  if move is None:                              # 3. otherwise first empty cell\n",
+        "    n = len(board)\n",
+        "    for i in range(n):\n",
+        "      for j in range(n):\n",
+        "        if board[i][j] == 0:\n",
+        "          move = (i, j)\n",
+        "          break\n",
+        "      if move:\n",
+        "        break\n",
+        "\n",
+        "  board[move[0]][move[1]] = my_mark\n",
+        "\n",
+        "\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "z8dcQoG5Ubdq",
+        "outputId": "c23262e2-0e1e-4bde-a612-9dad65b46677"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "    A   B   C   \n",
+            "   --- --- --- \n",
+            "1 |   |   |   | \n",
+            "   --- --- --- \n",
+            "2 |   |   |   | \n",
+            "   --- --- --- \n",
+            "3 |   |   |   | \n",
+            "   --- --- --- \n",
+            "Player 1, enter your move: A1\n",
+            "    A   B   C   \n",
+            "   --- --- --- \n",
+            "1 | X |   |   | \n",
+            "   --- --- --- \n",
+            "2 |   |   |   | \n",
+            "   --- --- --- \n",
+            "3 |   |   |   | \n",
+            "   --- --- --- \n",
+            "Computer (Player 2) is moving...\n",
+            "    A   B   C   \n",
+            "   --- --- --- \n",
+            "1 | X | O |   | \n",
+            "   --- --- --- \n",
+            "2 |   |   |   | \n",
+            "   --- --- --- \n",
+            "3 |   |   |   | \n",
+            "   --- --- --- \n",
+            "Player 1, enter your move: A2\n",
+            "    A   B   C   \n",
+            "   --- --- --- \n",
+            "1 | X | O |   | \n",
+            "   --- --- --- \n",
+            "2 | X |   |   | \n",
+            "   --- --- --- \n",
+            "3 |   |   |   | \n",
+            "   --- --- --- \n",
+            "Computer (Player 2) is moving...\n",
+            "    A   B   C   \n",
+            "   --- --- --- \n",
+            "1 | X | O |   | \n",
+            "   --- --- --- \n",
+            "2 | X |   |   | \n",
+            "   --- --- --- \n",
+            "3 | O |   |   | \n",
+            "   --- --- --- \n",
+            "Player 1, enter your move: C2\n",
+            "    A   B   C   \n",
+            "   --- --- --- \n",
+            "1 | X | O |   | \n",
+            "   --- --- --- \n",
+            "2 | X |   | X | \n",
+            "   --- --- --- \n",
+            "3 | O |   |   | \n",
+            "   --- --- --- \n",
+            "Computer (Player 2) is moving...\n",
+            "    A   B   C   \n",
+            "   --- --- --- \n",
+            "1 | X | O |   | \n",
+            "   --- --- --- \n",
+            "2 | X | O | X | \n",
+            "   --- --- --- \n",
+            "3 | O |   |   | \n",
+            "   --- --- --- \n",
+            "Player 1, enter your move: B3\n",
+            "    A   B   C   \n",
+            "   --- --- --- \n",
+            "1 | X | O |   | \n",
+            "   --- --- --- \n",
+            "2 | X | O | X | \n",
+            "   --- --- --- \n",
+            "3 | O | X |   | \n",
+            "   --- --- --- \n",
+            "Computer (Player 2) is moving...\n",
+            "    A   B   C   \n",
+            "   --- --- --- \n",
+            "1 | X | O | O | \n",
+            "   --- --- --- \n",
+            "2 | X | O | X | \n",
+            "   --- --- --- \n",
+            "3 | O | X |   | \n",
+            "   --- --- --- \n",
+            "Player 2 (O) wins!\n"
+          ]
+        }
+      ],
+      "source": [
+        "def play_game_vs_computer(n=3, computer_player=2):\n",
+        "  board = create_board(n)\n",
+        "  player = 1\n",
+        "  while True:\n",
+        "    draw_board(board)\n",
+        "    if player == computer_player:\n",
+        "      print(f\"Computer (Player {player}) is moving...\")\n",
+        "      computer_move(board, player)\n",
+        "    else:\n",
+        "      playermove(board, player)\n",
+        "\n",
+        "    result = check_winner(board)\n",
+        "    if result == 1:\n",
+        "      draw_board(board); print(\"Player 1 (X) wins!\"); break\n",
+        "    elif result == 2:\n",
+        "      draw_board(board); print(\"Player 2 (O) wins!\"); break\n",
+        "    elif result == 0:\n",
+        "      draw_board(board); print(\"It's a draw!\"); break\n",
+        "    player = 2 if player == 1 else 1\n",
+        "\n",
+        "play_game_vs_computer(3, computer_player=2)"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "2tB08iMqUbdr"
+      },
+      "source": [
+        "*Exercise 12:* Develop a version of the game where one player is the computer. This time, write a computer player using exhaustive search with a max depth parameter, similar to lecture."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 43,
+      "metadata": {
+        "id": "sfVS8bf3Ubdr"
+      },
+      "outputs": [],
+      "source": [
+        "def get_empty_cells(board):\n",
+        "  n = len(board)\n",
+        "  return [(i, j) for i in range(n) for j in range(n) if board[i][j] == 0]\n",
+        "\n",
+        "def evaluate_board(board, player):\n",
+        "  opponent = 2 if player == 1 else 1\n",
+        "  my_mark = \"X\" if player == 1 else \"O\"\n",
+        "  opp_mark = \"X\" if opponent == 1 else \"O\"\n",
+        "  n = len(board)\n",
+        "\n",
+        "  lines = list(board) + list(zip(*board))\n",
+        "  lines.append([board[i][i] for i in range(n)])\n",
+        "  lines.append([board[i][n-1-i] for i in range(n)])\n",
+        "\n",
+        "  score = 0\n",
+        "  for line in lines:\n",
+        "    my_count, opp_count = line.count(my_mark), line.count(opp_mark)\n",
+        "    if opp_count == 0: score += my_count\n",
+        "    if my_count == 0: score -= opp_count\n",
+        "  return score\n",
+        "\n",
+        "def minimax(board, player, current_turn, depth, max_depth):\n",
+        "  result = check_winner(board)\n",
+        "  if result == player: return 100 + depth\n",
+        "  if result == (2 if player == 1 else 1): return -100 - depth\n",
+        "  if result == 0: return 0\n",
+        "  if depth >= max_depth: return evaluate_board(board, player)\n",
+        "\n",
+        "  empty_cells = get_empty_cells(board)\n",
+        "  mark = \"X\" if current_turn == 1 else \"O\"\n",
+        "  next_turn = 2 if current_turn == 1 else 1\n",
+        "\n",
+        "  scores = []\n",
+        "  for (i, j) in empty_cells:\n",
+        "    board[i][j] = mark\n",
+        "    scores.append(minimax(board, player, next_turn, depth + 1, max_depth))\n",
+        "    board[i][j] = 0\n",
+        "\n",
+        "  return max(scores) if current_turn == player else min(scores)\n",
+        "\n",
+        "import random\n",
+        "\n",
+        "def computer_move_minimax(board, player, max_depth=4):\n",
+        "  mark = \"X\" if player == 1 else \"O\"\n",
+        "  next_turn = 2 if player == 1 else 1\n",
+        "\n",
+        "  best_score = float(\"-inf\")\n",
+        "  best_moves = []\n",
+        "\n",
+        "  for (i, j) in get_empty_cells(board):\n",
+        "    board[i][j] = mark\n",
+        "    score = minimax(board, player, next_turn, 1, max_depth)\n",
+        "    board[i][j] = 0\n",
+        "\n",
+        "    if score > best_score:\n",
+        "      best_score = score\n",
+        "      best_moves = [(i, j)]\n",
+        "    elif score == best_score:\n",
+        "      best_moves.append((i, j))\n",
+        "\n",
+        "  move = random.choice(best_moves)\n",
+        "  board[move[0]][move[1]] = mark"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 44,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "6OrpfCmoUbdr",
+        "outputId": "10c827fe-11b2-48d9-ec14-ac7f0e58ed49"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "    A   B   C   \n",
+            "   --- --- --- \n",
+            "1 |   |   |   | \n",
+            "   --- --- --- \n",
+            "2 |   |   |   | \n",
+            "   --- --- --- \n",
+            "3 |   |   |   | \n",
+            "   --- --- --- \n",
+            "Player 1, enter your move: B2\n",
+            "    A   B   C   \n",
+            "   --- --- --- \n",
+            "1 |   |   |   | \n",
+            "   --- --- --- \n",
+            "2 |   | X |   | \n",
+            "   --- --- --- \n",
+            "3 |   |   |   | \n",
+            "   --- --- --- \n",
+            "Computer (Player 2) is thinking...\n",
+            "    A   B   C   \n",
+            "   --- --- --- \n",
+            "1 |   |   |   | \n",
+            "   --- --- --- \n",
+            "2 |   | X |   | \n",
+            "   --- --- --- \n",
+            "3 |   |   | O | \n",
+            "   --- --- --- \n",
+            "Player 1, enter your move: B1\n",
+            "    A   B   C   \n",
+            "   --- --- --- \n",
+            "1 |   | X |   | \n",
+            "   --- --- --- \n",
+            "2 |   | X |   | \n",
+            "   --- --- --- \n",
+            "3 |   |   | O | \n",
+            "   --- --- --- \n",
+            "Computer (Player 2) is thinking...\n",
+            "    A   B   C   \n",
+            "   --- --- --- \n",
+            "1 |   | X |   | \n",
+            "   --- --- --- \n",
+            "2 |   | X |   | \n",
+            "   --- --- --- \n",
+            "3 |   | O | O | \n",
+            "   --- --- --- \n",
+            "Player 1, enter your move: A3\n",
+            "    A   B   C   \n",
+            "   --- --- --- \n",
+            "1 |   | X |   | \n",
+            "   --- --- --- \n",
+            "2 |   | X |   | \n",
+            "   --- --- --- \n",
+            "3 | X | O | O | \n",
+            "   --- --- --- \n",
+            "Computer (Player 2) is thinking...\n",
+            "    A   B   C   \n",
+            "   --- --- --- \n",
+            "1 |   | X | O | \n",
+            "   --- --- --- \n",
+            "2 |   | X |   | \n",
+            "   --- --- --- \n",
+            "3 | X | O | O | \n",
+            "   --- --- --- \n",
+            "Player 1, enter your move: C2\n",
+            "    A   B   C   \n",
+            "   --- --- --- \n",
+            "1 |   | X | O | \n",
+            "   --- --- --- \n",
+            "2 |   | X | X | \n",
+            "   --- --- --- \n",
+            "3 | X | O | O | \n",
+            "   --- --- --- \n",
+            "Computer (Player 2) is thinking...\n",
+            "    A   B   C   \n",
+            "   --- --- --- \n",
+            "1 |   | X | O | \n",
+            "   --- --- --- \n",
+            "2 | O | X | X | \n",
+            "   --- --- --- \n",
+            "3 | X | O | O | \n",
+            "   --- --- --- \n",
+            "Player 1, enter your move: A1\n",
+            "    A   B   C   \n",
+            "   --- --- --- \n",
+            "1 | X | X | O | \n",
+            "   --- --- --- \n",
+            "2 | O | X | X | \n",
+            "   --- --- --- \n",
+            "3 | X | O | O | \n",
+            "   --- --- --- \n",
+            "It's a draw!\n"
+          ]
+        }
+      ],
+      "source": [
+        "def play_game_minimax(n=3, computer_player=2, max_depth=4):\n",
+        "  board = create_board(n)\n",
+        "  player = 1\n",
+        "  while True:\n",
+        "    draw_board(board)\n",
+        "    if player == computer_player:\n",
+        "      print(f\"Computer (Player {player}) is thinking...\")\n",
+        "      computer_move_minimax(board, player, max_depth)\n",
+        "    else:\n",
+        "      playermove(board, player)\n",
+        "\n",
+        "    result = check_winner(board)\n",
+        "    if result == 1:\n",
+        "      draw_board(board); print(\"Player 1 (X) wins!\"); break\n",
+        "    elif result == 2:\n",
+        "      draw_board(board); print(\"Player 2 (O) wins!\"); break\n",
+        "    elif result == 0:\n",
+        "      draw_board(board); print(\"It's a draw!\"); break\n",
+        "    player = 2 if player == 1 else 1\n",
+        "\n",
+        "play_game_minimax(3, computer_player=2, max_depth=9)  # 9 = perfect play on 3x3"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "IZey4vE2Ubdr"
+      },
+      "source": [
+        "*Exercise 13:* Make the 2 computer players play each-other for 10 games on a 3x3, then 4x4, then 5x5 grid. Set the max depth so that the games only take seconds. Measure the \"smarter\" player's win rate for each grid."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 45,
+      "metadata": {
+        "id": "HDu9Vgs7Ubdr"
+      },
+      "outputs": [],
+      "source": [
+        "def play_computer_vs_computer(n, depth_p1, depth_p2):\n",
+        "  board = create_board(n)\n",
+        "  player = 1\n",
+        "  while True:\n",
+        "    depth = depth_p1 if player == 1 else depth_p2\n",
+        "    computer_move_minimax(board, player, depth)\n",
+        "    result = check_winner(board)\n",
+        "    if result in (0, 1, 2):\n",
+        "      return result\n",
+        "    player = 2 if player == 1 else 1\n",
+        "\n",
+        "def run_experiment(n, games, depth_p1, depth_p2):\n",
+        "  wins1 = wins2 = draws = 0\n",
+        "  for _ in range(games):\n",
+        "    result = play_computer_vs_computer(n, depth_p1, depth_p2)\n",
+        "    if result == 1: wins1 += 1\n",
+        "    elif result == 2: wins2 += 1\n",
+        "    else: draws += 1\n",
+        "\n",
+        "  print(f\"n={n}: Player 1 (depth={depth_p1}) win rate: {wins1/games:.0%} | \"\n",
+        "        f\"Player 2 (depth={depth_p2}) win rate: {wins2/games:.0%} | \"\n",
+        "        f\"Draws: {draws/games:.0%}\")\n",
+        "\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 46,
+      "metadata": {
+        "id": "v3XqWI6bUbdr",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "a458b72f-847b-4059-af49-7e3680897996"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "n=3: Player 1 (depth=9) win rate: 60% | Player 2 (depth=1) win rate: 0% | Draws: 40%\n",
+            "n=4: Player 1 (depth=5) win rate: 0% | Player 2 (depth=1) win rate: 0% | Draws: 100%\n",
+            "n=5: Player 1 (depth=3) win rate: 0% | Player 2 (depth=1) win rate: 0% | Draws: 100%\n"
+          ]
+        }
+      ],
+      "source": [
+        "run_experiment(3, 10, 9, 1)\n",
+        "run_experiment(4, 10, 5, 1)\n",
+        "run_experiment(5, 10, 3, 1)"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "8iqIXqqGUbdr"
+      },
+      "source": [
+        "## Lab Summary\n",
+        "\n",
+        "In this lab you practiced:\n",
+        "\n",
+        "- Representing a game board using nested lists\n",
+        "- Writing small, focused functions\n",
+        "- Using conditionals and loops to analyze program state\n",
+        "- Thinking carefully about assumptions and edge cases\n",
+        "- Using LLMs **responsibly** as learning tools rather than answer generators\n",
+        "\n",
+        "The goal is not just to make the program work, but to understand *why* it works.\n",
+        "That understanding is what allows you to use tools — including AI — effectively.\n"
+      ]
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "display_name": "Python 3 (ipykernel)",
+      "language": "python",
+      "name": "python3"
+    },
+    "language_info": {
+      "codemirror_mode": {
+        "name": "ipython",
+        "version": 3
+      },
+      "file_extension": ".py",
+      "mimetype": "text/x-python",
+      "name": "python",
+      "nbconvert_exporter": "python",
+      "pygments_lexer": "ipython3",
+      "version": "3.13.12"
+    },
+    "colab": {
+      "provenance": []
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 0
+}
